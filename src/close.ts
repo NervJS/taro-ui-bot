@@ -32,7 +32,7 @@ export class Closeable extends App {
       this.logger.info('%s/%s#%d is being unmarked', owner, repo, number)
       await this.github.issues.removeLabel({owner, repo, number, name: TO_BE_CLOSED_LABEL})
       if (issueInfo.data.state === 'closed' && issueInfo.data.user.login !== issueInfo.data.closed_by.login) {
-        await this.github.issues.edit({owner, repo, number, state: 'open'})
+        await this.github.issues.update({owner, repo, number, state: 'open'})
       }
     }
   }
@@ -41,12 +41,12 @@ export class Closeable extends App {
     const { owner, repo, number } = issue
     this.logger.info('%s/%s#%d is being closed', issue.owner, issue.repo, issue.number)
     await this.github.issues.removeLabel({owner, repo, number, name: TO_BE_CLOSED_LABEL})
-    return this.github.issues.edit(Object.assign({}, issue, {state: 'closed'}))
+    return this.github.issues.update(Object.assign({}, issue, {state: 'closed'}))
   }
 
   private async findLastLabeledEvent (owner, repo, number) {
     const params = { owner, repo, number, per_page: 100 }
-    const events = await (this.github.paginate as any)(this.github.issues.getEvents(params))
+    const events = await (this.github.paginate as any)(this.github.issues.listEvents(params))
     return events[0].data
       .reverse()
       .find(event => event.event === 'labeled' && event.label.name === TO_BE_CLOSED_LABEL);

@@ -25,7 +25,7 @@ export class App {
 
 
   protected async hasResponseLabel (issue: Issue, responseLabel: string) {
-    const labels = await this.github.issues.getIssueLabels(issue)
+    const labels = await this.github.issues.listLabelsOnIssue(issue)
 
     return labels.data.map(label => label.name).includes(responseLabel)
   }

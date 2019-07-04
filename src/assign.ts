@@ -12,7 +12,7 @@ export async function assignAccordingLabel (context: Context) {
       }
       try {
         const repo = context.repo()
-        await context.github.issues.addAssigneesToIssue({
+        await context.github.issues.addAssignees({
           number,
           assignees: responsers,
           ...repo

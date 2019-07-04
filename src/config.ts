@@ -69,10 +69,12 @@ interface LabelsResponser {
 
 // 根据标签自动指派负责人，如果不是自己指派自己，就新建评论 at 负责人
 export const labelsResponser: LabelsResponser = {
-  // '编译器': ['yuche'],
-  // 'CLI': ['luckyadam'],
-  // '组件化': ['Chen-jj'],
-  // 'H5 组件库': ['jinjinjin0731'],
-  // 'React Native': ['Pines-Cheng'],
-  // 'H5': ['Littly']
+  'UI': ['koppthe'],
+  '表单组件': ['jimczj'],
+  '基础组件': ['koppthe'],
+  '操作反馈组件': ['SzHeJason'],
+  '视图组件': ['lsqy', 'koppthe'],
+  '布局组件': ['jimczj', 'SzHeJason'],
+  '导航组件': ['jimczj'],
+  '高阶组件': ['SzHeJason'],
 }

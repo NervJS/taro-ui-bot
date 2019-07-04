@@ -3,7 +3,7 @@ import { welcomeConfig } from './config'
 
 function welcome (type: 'issue' | 'pr') {
   return async (context: Context) => {
-    const response = await context.github.issues.getForRepo(context.repo({
+    const response = await context.github.issues.listForRepo(context.repo({
       state: 'all',
       creator: context.payload.issue.user.login
     }))
