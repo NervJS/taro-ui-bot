@@ -4,7 +4,6 @@ import { Closeable } from './close'
 import { welcomeNewIssue, welcomeNewPR } from './welcome'
 import { assignAccordingLabel, informAssignees } from './assign'
 import { markerConfigs } from './config'
-import { WeeklyDigest } from './weekly-digest/digest'
 
 const createScheduler = require('probot-scheduler')
 
@@ -23,8 +22,7 @@ export = (robot: Application) => {
       return marker.sweep()
     })
     const closeable = new Closeable(context, context.log)
-    const weeklyDigest = new WeeklyDigest(context, context.log)
-    await Promise.all([...markers, closeable.sweep(), weeklyDigest.sweep()])
+    await Promise.all([...markers, closeable.sweep()])
   }
 
   async function unmark (context: Context) {
